@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:Viewmodels="clr-namespace:ProjectCafe.Viewmodels"
-             d:DataContext="{d:DesignInstance Type=Viewmodels:BoughtProductViewmodel}"
+             xmlns:Viewmodels="clr-namespace:ProjectCafe.Viewmodels" xmlns:viewmodels="clr-namespace:ProjectCafe.Viewmodels.ProjectCafe.Viewmodels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:BoughtProductViewmodel}"
              mc:Ignorable="d" 
              d:DesignHeight="200" Width="115">
     <Border BorderBrush="Brown" BorderThickness="1">
@@ -13,7 +13,8 @@
                 <Image Source="{Binding Product.image}" HorizontalAlignment="Left" Height="96" Margin="10,10,0,0" VerticalAlignment="Top" Width="96"/>
                 <TextBlock Foreground="Green" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,20,0,0"  Text="{Binding Product.name}" VerticalAlignment="Top" Height="25" Width="96" Grid.Row="1" FontWeight="UltraBold"/>
                 <TextBlock Foreground="Red" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"  Text="{Binding Product.cost}" VerticalAlignment="Top" Height="25" Width="96" Grid.Row="1" FontStyle="Italic"/>
-                <Button Command="{Binding Butt}" Height="200" Width="115" Margin="-1,-177,0,0" Opacity="0"/>
+                <TextBlock Foreground="Indigo" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"  Text="{Binding Product.count.Item, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="96" Grid.Row="1" FontStyle="Oblique"/>
+                <Button Command="{Binding Command}" Height="200" Width="115" Margin="-1,-204,0,0" Opacity="0"/>
             </WrapPanel>
         </Grid>
     </Border>

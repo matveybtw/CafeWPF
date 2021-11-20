@@ -5,21 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectCafe" xmlns:Viewmodels="clr-namespace:ProjectCafe.Viewmodels" d:DataContext="{d:DesignInstance Type=Viewmodels:MainWindowViewmodel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800" MinHeight="500" MinWidth="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding Path = AvailableCToBuyProducts}" Height="225" Margin="0,0,0,194" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <ItemsControl ItemsSource="{Binding Path = OrderedProducts}" Margin="0,212,0,0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <TabControl>
+            <TabItem Header="Заказ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <ItemsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path = AvailableCToBuyProducts}" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Top" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <ItemsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Path = OrderedProducts}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Top">
+                                </WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <TextBlock TextAlignment="Center" FontSize="20" Grid.Column="1" Grid.Row="0" Text="Общая стоимость:"/>
+                    <TextBlock TextAlignment="Center" FontSize="20" Grid.Column="1" Grid.Row="0" Text="{Binding Path=TotalCost.Item, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,28,0,131"/>
+                    <TextBlock TextAlignment="Center" FontSize="20" Grid.Column="1" Grid.Row="0" Text="грн" Margin="105,28,10,131"/>
+                    <Button Command="{Binding Buy}" Content="Оплатить" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="7,64,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
+                    <Button Command="{Binding Clear}" Content="Очистить" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="102,64,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Список товаров">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="35*"/>
+                    </Grid.ColumnDefinitions>
+                    <ItemsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path = Products}" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Top" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <TextBlock FontSize="20" TextAlignment="Center" Grid.Column="1" Text="Новый товар" Margin="0,0,0,410"></TextBlock>
+                    <Image Grid.Column="1" Source="{Binding NewItem.Image.Item}" HorizontalAlignment="Left" Height="222" Margin="26,41,0,0" VerticalAlignment="Top" Width="222"/>
+                    <Button Command="{Binding ChooseImage}" Opacity="0" Grid.Column="1" Height="222" Margin="26,41,27,0" VerticalAlignment="Top" Width="222"></Button>
+                    <TextBlock FontSize="15" TextAlignment="Left" Grid.Column="1" Text="Название" Margin="10,263,10,147"></TextBlock>
+                    <TextBox Text="{Binding Path=NewItem.Name.Item}" FontSize="15" TextAlignment="Left" Grid.Column="1" Margin="9,294,11,116"></TextBox>
+                    <TextBlock FontSize="15" TextAlignment="Left" Grid.Column="1" Text="Стоимость" Margin="10,327,10,83"/>
+                    <TextBox Text="{Binding Path=NewItem.Cost.Item}" FontSize="15" TextAlignment="Left" Grid.Column="1" Margin="9,358,11,52"/>
+                    <Button Command="{Binding Add}" Content="Добавить" Grid.Column="1" HorizontalAlignment="Left" Margin="10,397,0,0" VerticalAlignment="Top" Width="100" Height="34"/>
+                    <Button Content="Очистить" Grid.Column="1" HorizontalAlignment="Left" Margin="154,397,0,0" VerticalAlignment="Top" Width="110" Height="34"/>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <Grid>
+                    <DataGrid AutoGenerateColumns="false" ItemsSource="{Binding Orders}" Margin="10,10,225,65"  CanUserDeleteRows="False" CanUserAddRows="False" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата и время заказа" Binding="{Binding Path=DateString}"/>
+                            <DataGridTextColumn Header="Список купленных товаров" Binding="{Binding Path=GetProductsString}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

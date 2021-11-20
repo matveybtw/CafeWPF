@@ -14,7 +14,7 @@
                 <TextBlock Foreground="Green" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,20,0,0"  Text="{Binding Product.name}" VerticalAlignment="Top" Height="25" Width="96" Grid.Row="1" FontWeight="UltraBold"/>
                 <TextBlock Foreground="Red" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"  Text="{Binding Product.cost}" VerticalAlignment="Top" Height="25" Width="96" Grid.Row="1" FontStyle="Italic"/>
                 
-                <Button Command="{Binding Butt}" Height="200" Width="115" Margin="-1,-177,0,0" Opacity="0"/>
+                <Button Command="{Binding Command}" Height="200" Width="115" Margin="-1,-177,0,0" Opacity="0"/>
             </WrapPanel>
     </Grid>
     </Border>

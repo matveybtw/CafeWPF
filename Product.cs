@@ -14,13 +14,15 @@ namespace ProjectCafe
     {
         //public ChangingItem<string> name { get; set; } = new ChangingItem<string>();
         //public ChangingItem<string> imageurl { get; set; } = new ChangingItem<string>();
-        //public ChangingItem<string> cost { get; set; } = new ChangingItem<string>();\
+        //public ChangingItem<string> cost { get; set; } = new ChangingItem<string>();
         public string name { get; set; }
         public BitmapImage image { get; set; }
-        public string cost { get; set; }
+        public string cost => Cost.ToString() + " грн";
+        public int Cost { get; set; }
     }
     public class BoughtProduct:Product
     {
-        public ChangingItem<string> count { get; set; }
+        public ChangingItem<int> count { get; set; }
+        
     }
 }

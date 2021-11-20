@@ -1,4 +1,5 @@
 ﻿using ProjectCafe.Viewmodels;
+using ProjectCafe.Viewmodels.ProjectCafe.Viewmodels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,6 @@ namespace ProjectCafe
             InitializeComponent();
             DataContext = new BoughtProductViewmodel(Product);
         }
+
     }
 }
